@@ -1,0 +1,10 @@
+streamlit
+pandas
+requests
+matplotlib
+python-dateutil
+numpy
+reportlab
+pyttsx3
+SpeechRecognition
+pyaudio
