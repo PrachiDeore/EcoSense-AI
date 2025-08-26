@@ -44,18 +44,52 @@ st.set_page_config(page_title="EcoSense AI", page_icon="🌿", layout="wide")
 with st.sidebar:
     st.markdown("### 🎨 Appearance")
     theme_choice = st.radio("Theme", ["Light ☀️", "Dark 🌑"], index=0, horizontal=True)
-    accent = st.color_picker("Accent color", "#22c55e")  # default green
+    accent = st.color_picker("Accent color", "#13A047")  # default green
 is_dark = theme_choice == "Dark 🌑"
 sidebar_text_color = "#f4fcfc" if is_dark else "#B0CC75"
 
 # CSS: animated gradient background + glassmorphism cards + better typography
 bg_grad_start = "#0e1117" if is_dark else "#f9fafb"     # lighter background in light mode
 bg_grad_end   = "#111827" if is_dark else "#ffffff"
-text_color    = "#f4fcfc" if is_dark else "#80D18F"     # 🔥 true black for light mode
+text_color    = "#f4fcfc" if is_dark else "#3FDC5C"     # 🔥 true black for light mode
 muted_color   = "#e8ecf2" if is_dark else "#374151"     # darker muted for light mode
-card_rgba     = "rgba(255,255,255,0.06)" if is_dark else "rgba(255,255,255,0.95)"  # less transparent in light mode
+card_rgba = "rgba(255,255,255,0.15)" if is_dark else "rgba(255,255,255,0.88)" # less transparent in light mode
 shadow_rgba   = "rgba(0,0,0,0.35)" if is_dark else "rgba(0,0,0,0.08)"
 border_rgba   = "rgba(255,255,255,0.18)" if is_dark else "rgba(17,24,39,0.10)"
+# High-contrast result text color
+result_text_color = "#0f5132" if not is_dark else "#d1fae5" 
+ 
+st.markdown(
+    f"""
+    <style>
+        /* Force readable text in alert boxes */
+        div.stAlert > div {{
+            color: {"#0f5132" if not is_dark else "#d1fae5"} !important;
+            font-weight: 600 !important;
+        }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
+st.markdown(
+    f"""
+    <style>
+        /* Global variable for result text */
+        :root {{
+            --result-text: {result_text_color};
+        }}
+
+        /* Fix for Streamlit alerts (st.success, st.info, etc.) */
+        .stAlert {{
+            color: var(--result-text) !important;
+            font-weight: 500;
+        }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 st.markdown(
     f"""
